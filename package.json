@@ -1,0 +1,53 @@
+{
+  "name": "directus-extension-custom-svg-icons",
+  "description": "Custom SVG icon selector interface for Directus. Upload SVG files to the Icon Config folder and use them across your collections.",
+  "icon": "insert_emoticon",
+  "version": "1.0.0",
+  "keywords": [
+    "directus",
+    "directus-extension",
+    "directus-extension-bundle"
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "directus:extension": {
+    "type": "bundle",
+    "path": {
+      "app": "dist/app.js",
+      "api": "dist/api.js"
+    },
+    "entries": [
+      {
+        "type": "interface",
+        "name": "custom-svg-icons-interface",
+        "source": "src/custom-svg-icons-interface/index.ts"
+      },
+      {
+        "type": "endpoint",
+        "name": "custom-svg-icons-endpoint",
+        "source": "src/custom-svg-icons-endpoint/index.ts"
+      },
+      {
+        "type": "display",
+        "name": "custom-svg-icons-display",
+        "source": "src/custom-svg-icons-display/index.ts"
+      }
+    ],
+    "host": "^10.10.0"
+  },
+  "scripts": {
+    "build": "directus-extension build",
+    "dev": "directus-extension build -w --no-minify",
+    "link": "directus-extension link",
+    "validate": "directus-extension validate",
+    "add": "directus-extension add"
+  },
+  "devDependencies": {
+    "@directus/extensions-sdk": "17.0.3",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.25",
+    "@types/node": "^24.10.1"
+  }
+}
