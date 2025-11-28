@@ -295,8 +295,14 @@ export default defineEndpoint({
           filter: {
             parent: { _eq: rootFolderId },
           },
-          fields: ["id"],
+          fields: ["id", "name"],
           limit: -1,
+        });
+
+        // Create a map of folder ID to folder name for quick lookup
+        const folderMap = new Map<string, string>();
+        (subfolders || []).forEach((sf: any) => {
+          folderMap.set(sf.id, sf.name);
         });
 
         const folderIds = [
@@ -310,7 +316,7 @@ export default defineEndpoint({
             folder: { _in: folderIds },
             type: { _eq: "image/svg+xml" },
           },
-          fields: ["id", "filename_download", "title", "description"],
+          fields: ["id", "filename_download", "title", "description", "folder"],
           limit: -1,
         });
 
@@ -321,8 +327,21 @@ export default defineEndpoint({
           const filePromises = allFiles.map(async (file: any) => {
             const key = file.filename_download.replace(".svg", "");
             const label = file.title || key;
+
+            // Determine the folder name if the file is in a subfolder
+            const subfolderName =
+              file.folder !== rootFolderId ? folderMap.get(file.folder) : null;
+
+            // Calculate value: use description, or merge subfolder + title in kebab-case, or use key
             const value =
-              file.description || (file.title ? toKebabCase(file.title) : key);
+              file.description ||
+              (file.title
+                ? toKebabCase(
+                    subfolderName
+                      ? `${subfolderName} ${file.title}`
+                      : file.title
+                  )
+                : key);
 
             // Only fetch SVG content if this value is requested
             if (valueArray.includes(value)) {
