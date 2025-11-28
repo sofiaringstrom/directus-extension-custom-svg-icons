@@ -2,7 +2,7 @@
 
 A Directus extension bundle that provides a complete icon management solution with an interface for selecting custom SVG icons, a display for rendering them, and an endpoint for serving icon data from a centralized folder.
 
-<img src="https://raw.githubusercontent.com/sofiaringstrom/directus-extension-custom-svg-icons/refs/heads/main/docs/interface-2.png" width="300px" height="auto" style="border: 1px solid #d4d4d8; border-radius: 12px;">
+<img src="https://raw.githubusercontent.com/sofiaringstrom/directus-extension-custom-svg-icons/refs/heads/main/docs/interface-2.png" width="500px" height="auto" style="border: 1px solid #d4d4d8; border-radius: 12px;">
 
 ## Features
 
@@ -48,6 +48,8 @@ npm run build
 2. Create a new folder named exactly **"Custom SVG Icons"** (case-sensitive)
 3. This is where all your SVG icons will be stored
 
+<img src="https://raw.githubusercontent.com/sofiaringstrom/directus-extension-custom-svg-icons/refs/heads/main/docs/file-library.png" width="100%" height="auto" style="border: 1px solid #d4d4d8; border-radius: 12px;">
+
 ### Step 2: Upload SVG Files
 
 1. Open the **Custom SVG Icons** folder
@@ -80,6 +82,10 @@ npm run build
    - **Interface**: Select **"Custom SVG Icon"**
    - **Display**: Select **"Custom SVG Icon"** (optional, for displaying the icon visually)
    - **Save** the field
+
+<img src="https://raw.githubusercontent.com/sofiaringstrom/directus-extension-custom-svg-icons/refs/heads/main/docs/interface.png" width="70%" height="auto" style="border: 1px solid #d4d4d8; border-radius: 12px;">
+
+<img src="https://raw.githubusercontent.com/sofiaringstrom/directus-extension-custom-svg-icons/refs/heads/main/docs/display.png" width="70%" height="auto" style="border: 1px solid #d4d4d8; border-radius: 12px;">
 
 ### Step 4: Use the Interface
 
