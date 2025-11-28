@@ -2,7 +2,7 @@
   "name": "directus-extension-custom-svg-icons",
   "description": "Custom SVG icon selector interface for Directus. Upload SVG files to the Icon Config folder and use them across your collections.",
   "icon": "insert_emoticon",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "keywords": [
     "directus",
     "directus-extension",
