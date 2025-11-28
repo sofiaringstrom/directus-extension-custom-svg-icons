@@ -22,7 +22,7 @@ Install the extension from the Directus Marketplace. See the [Official Guide](ht
 Or if you prefer to install manually:
 
 ```bash
-npm install directus-extension-flat-tabs-interface
+npm install directus-extension-custom-svg-icons
 ```
 
 ## Usage
