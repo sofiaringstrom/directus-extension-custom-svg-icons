@@ -9,38 +9,23 @@ A Directus extension bundle that provides a complete icon management solution wi
 - 📁 **Centralized Icon Management** - Upload all SVG files once to a dedicated folder
 - 📂 **Subfolder Grouping** - Organize icons into subfolders with labeled group headers
 - 🔍 **Searchable Interface** - Search box to quickly filter through your icons
-- 🎨 **Icon-Focused Display** - Visual grid showing icons (not text labels)
+- 🎨 **Icon-Focused Display** - Visual grid showing icons
 - 💬 **Hover Tooltips** - See icon name on hover
 - 🔄 **Custom Return Values** - Each icon can return a custom string value
-- 👁️ **Visual Display Component** - Renders icons beautifully in collection views
-- ⚡ **Performance Optimized** - Parallel file loading for sub-second response times
-- 🔄 **Always Fresh** - No caching means changes are visible immediately
+- 👁️ **Visual Display Component** - Renders icons in collection views
 - 🔒 **Permissions Aware** - Respects Directus user permissions
-- 🎯 **Native Directus Design** - Matches the look and feel of Directus's built-in icon picker
 
 ## Installation
 
-1. Navigate to the extension directory:
+Install the extension from the Directus Marketplace. See the [Official Guide](https://docs.directus.io/extensions/installing-extensions.html) for more information.
+
+Or if you prefer to install manually:
 
 ```bash
-cd _extensions/directus-extension-custom-svg-icons
+npm install directus-extension-flat-tabs-interface
 ```
 
-2. Install dependencies (if not already done):
-
-```bash
-npm install
-```
-
-3. Build the extension:
-
-```bash
-npm run build
-```
-
-4. Restart your Directus instance to load the extension.
-
-## Setup Instructions
+## Usage
 
 ### Step 1: Create the Custom SVG Icons Folder
 
@@ -105,38 +90,6 @@ When viewing items in your collection, the Display component will automatically:
 3. Apply background, border, and padding if configured
 4. Show a fallback text if the icon is not found
 
-## How It Works
-
-### Data Flow
-
-**Selection (Interface):**
-
-```
-Custom SVG Icons Folder (Files)
-    ↓
-Endpoint reads SVG files & metadata
-    ↓
-Interface displays icon grid with search
-    ↓
-User searches/hovers/selects icon
-    ↓
-Custom string value saved to database
-```
-
-**Display (Collection Views):**
-
-```
-Database contains icon value (e.g., "icon-home")
-    ↓
-Display component requests specific icon via /by-value endpoint
-    ↓
-Endpoint fetches only the requested icon(s)
-    ↓
-Renders SVG icon visually (24×24px)
-```
-
-**Performance Note:** The display uses the `/by-value` endpoint, which is much more efficient than fetching all icons. When displaying a list of items, only the icons actually needed are fetched.
-
 ### Return Value Priority
 
 1. **File Description** - Primary source for return value
@@ -148,20 +101,6 @@ Renders SVG icon visually (24×24px)
 - Title: "Home Icon", Description: "custom-home" → Returns: `"custom-home"`
 - Title: "User Profile", Description: empty → Returns: `"user-profile"`
 - Title: empty, Description: empty, Filename: "settings.svg" → Returns: `"settings"`
-
-### Performance
-
-The extension uses **parallel file loading** to fetch all SVG files simultaneously:
-
-- ⚡ **Sub-second response** - Even with 50+ icons, response time is ~100-200ms
-- 🔄 **Always fresh** - No caching means changes are visible immediately
-- 📊 **Efficient** - All files loaded in parallel, not sequentially
-
-**Response times:**
-
-- 10 icons: ~80ms
-- 50 icons: ~120ms
-- 100 icons: ~200ms
 
 ## Example Setup
 
@@ -210,32 +149,6 @@ Let's say you want to use icons for a "features" collection:
 // Use this to map to your frontend icon library
 ```
 
-## Development
-
-### Build Commands
-
-- **Development build with watch:** `npm run dev`
-- **Production build:** `npm run build`
-- **Validate extension:** `npm run validate`
-
-### File Structure
-
-```
-directus-extension-custom-svg-icons/
-├── src/
-│   ├── custom-svg-icons-endpoint/
-│   │   └── index.ts           # API endpoint for fetching icons
-│   ├── custom-svg-icons-interface/
-│   │   ├── index.ts            # Interface definition
-│   │   └── interface.vue       # Vue component for icon picker
-│   └── custom-svg-icons-display/
-│       ├── index.ts            # Display definition
-│       └── display.vue         # Vue component for displaying icons
-├── dist/                       # Built files (auto-generated)
-├── package.json
-└── README.md
-```
-
 ## Troubleshooting
 
 ### Icons not showing up
@@ -243,23 +156,10 @@ directus-extension-custom-svg-icons/
 1. **Check folder name**: Must be exactly "Custom SVG Icons" (case-sensitive)
 2. **Check file type**: Only `.svg` files with MIME type `image/svg+xml`
 3. **Check permissions**: Ensure your user role has read access to the Files collection
-4. **Clear cache**: Call the `/custom-svg-icons/clear-cache` endpoint
 
 ### Error: "Custom SVG Icons folder not found"
 
 Create a folder in Files named exactly "Custom SVG Icons".
-
-### Icons load slowly
-
-The extension uses parallel loading to fetch all SVG files simultaneously, so even with 50+ icons, loading should complete in under 200ms. If you're experiencing slow loads:
-
-1. **Check number of icons** - Very large icon sets (100+) may take longer
-2. **Check file sizes** - Large SVG files will take longer to read
-3. **Check server resources** - Slow disk I/O can impact performance
-
-**Optional: Add caching back**
-
-If you need even faster performance for very large icon sets, you can add caching back. Edit `src/custom-svg-icons-endpoint/index.ts` and add cache logic at the top of the GET handler.
 
 ### SVG not displaying correctly
 
@@ -364,32 +264,11 @@ The display component offers visual customization options for how icons appear i
 
 ### Background Color
 
-Select a custom background color for the icon:
-
-- Uses Directus's native color picker
-- Supports any hex color value
-- Leave empty for no background (default)
-
-**When to use:**
-
-- ✅ Improve icon visibility with contrasting backgrounds
-- ✅ Create color-coded icon containers
-- ✅ Add visual prominence to important icons
+Select a custom background color for the icon.
 
 ### Border Color
 
-Select a custom border color for the icon:
-
-- Uses Directus's native color picker
-- Supports any hex color value
-- Creates a 2px border around the icon
-- Leave empty for no border (default)
-
-**When to use:**
-
-- ✅ Create distinct icon boundaries
-- ✅ Add emphasis with color-coded borders
-- ✅ Create a button-like appearance
+Select a custom border color for the icon.
 
 ### Padding
 
@@ -401,49 +280,10 @@ Add custom padding around the icon:
 
 **Display Behavior:**
 
-- Icons are rendered at 24×24px by default
-- Size increases with padding, background, and border
-- Uses the efficient `/by-value` endpoint (only fetches the needed icon, not all icons)
 - If an icon is not found, the raw value is displayed as text
-- If no value is set, a dash (—) is shown
 - Icons automatically reload when the value changes
 - Background, border, and padding can be combined for complete customization
-- SVGs display with their original colors preserved
 
-## Customization
+## Future Features
 
-### Styling the Interface
-
-Edit `src/custom-svg-icons-interface/interface.vue` and modify the `<style>` section to change:
-
-- Icon button sizes and spacing
-- Hover effects and transitions
-- Search input styling
-- Dropdown menu dimensions
-- Icon grid layout
-
-### Styling the Display
-
-Edit `src/custom-svg-icons-display/display.vue` and modify the `<style>` section to change:
-
-- Icon base size (default: 24×24px)
-- Background color application
-- Border styling (width, radius)
-- Padding behavior
-- Fallback text appearance
-
-## Version Control with Directus Sync
-
-The Custom SVG Icons folder and its files can be synced using `directus-sync`:
-
-1. Icons are stored in the `directus_files` collection
-2. Use `directus-sync pull` to export file metadata
-3. Actual SVG files need to be backed up separately (in `uploads/` folder)
-
-## License
-
-Same as your Directus instance.
-
-## Support
-
-For issues or questions, please refer to the Directus documentation or contact your development team.
+- [ ] Cached response with refresh on icon change
