@@ -217,7 +217,7 @@
   }
 
   function getTooltipText(item: Icon) {
-    return `${item.label} (${item.value})`;
+    return `${item.label}`;
   }
 </script>
 
@@ -282,8 +282,8 @@
   .content {
     padding: 12px;
     background-color: var(--theme--background);
-    min-width: 320px;
-    max-width: 480px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .group-header {
