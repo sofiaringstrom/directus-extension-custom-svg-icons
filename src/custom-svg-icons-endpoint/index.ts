@@ -165,7 +165,9 @@ export default defineEndpoint({
               const label = file.title || key;
               const value =
                 file.description ||
-                (file.title ? toKebabCase(file.title) : key);
+                (file.title
+                  ? toKebabCase(`${subfolder.name} ${file.title}`)
+                  : key);
 
               return {
                 key,
